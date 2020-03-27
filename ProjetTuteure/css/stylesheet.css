@@ -1,0 +1,329 @@
+footer{
+    background-color: #929fba;
+    color: #2350AC !important;
+}
+
+#corps{
+    margin-top: 5%;
+    background-image: url("../image/fond.jpg");
+}
+
+/*HEADER*/
+.navbar{
+    background-color: #2350AC;
+}
+
+.nav-item a {
+    position: relative;
+}
+.nav-item a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+.nav-item a:hover:after {
+    width: 100%;
+    left: 0;
+}
+/*FIN HEADER*/
+
+/*CONNEXION*/
+#formulaireconnexion{
+    background-color: beige !important;;
+}
+#formulaireconnexion input{
+    border-color: #2350AC ;
+}
+
+#formulaireconnexion .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#formulaireconnexion .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#connexionfail{
+    background-color: beige !important;
+}
+
+#connexionok{
+    background-color: beige !important;
+}
+/*FIN CONNEXION*/
+
+#deconnexionok{
+    background-color: beige !important;
+}
+
+/*INSCRIPTION*/
+#inscriptiontout{
+    background-color: beige !important;
+}
+
+#inscriptiontout .btn{
+    border-color: #2350AC !important;
+    color : black;
+}
+
+#inscriptiontout .btn:hover{
+    background-color: #2350AC !important;
+    color : white;
+}
+/*FIN INSCRIPTION*/
+
+/*INSCRIPTION ETUDIANT*/
+#formulaireinscriptiontout{
+    background-color: beige !important;;
+}
+
+#formulaireinscriptiontout input, select{
+    border-color: #2350AC ;
+}
+
+#formulaireinscriptiontout .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#formulaireinscriptiontout .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+/*FIN INSCRIPTION ETU*/
+
+/*RECHERCHE DE STAGE*/
+#formulairerecherchestage{
+    background-color: beige !important;
+}
+
+#recherchestage input, select{
+    border-color: #2350AC !important;
+}
+
+#recherchestage .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#recherchestage .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#resultatstage{
+    background-color: beige !important;
+}
+
+.fa-calendar, .fa-tasks, .fa-suitcase, .fa-clock-o, .fa-pencil, .fa-tag, .fa-comments{
+    color: #2350AC !important;
+}
+/*FIN RECHERCHE DE STAGE*/
+
+/*DETAIL STAGE*/
+#detailstage{
+    background-color: beige !important;
+}
+
+
+/*FIN DETAIL STAGE*/
+
+/*POSTULER*/
+#postuler{
+    background-color: beige !important;
+}
+
+#postuler select{
+    border-color: #2350AC !important;
+}
+
+#postuler .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#postuler .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+/*FIN POSTULER*/
+
+/*MES DEMANDES*/
+#mesDemandes{
+    background-color: beige !important;
+}
+/*FIN MES DEMANDES*/
+/*FAIRE OFFRE STAGE*/
+#formulairefaireoffrestage{
+    background-color: beige !important;;
+}
+
+#faireoffrestage input, select, textarea{
+    border-color: #2350AC ;
+}
+
+#faireoffrestage .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#faireoffrestage .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#offreok{
+    background-color: beige !important;
+}
+#offreok .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#offreok .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+/*FIN FAIRE OFFRE STAGE*/
+
+/*DEMANDES RECUES ENTREPRISE*/
+#tableau{
+    background-color: beige !important;
+}
+
+#recherchestage input, select{
+    border-color: #2350AC !important;
+}
+
+#recherchestage .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#recherchestage .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#resultatstage{
+    background-color: beige !important;
+}
+
+/*FIN DEMANDES RECUES ENTREPRISE*/
+
+/*CONSULTER PROFIL*/
+#profil{
+    background-color: beige !important;
+}
+#profil .btn{
+    background-color: #2350AC;
+    color : white;
+}
+
+#profil .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#profil input, select{
+    border-color: #2350AC !important;
+}
+
+#profil .btn-outline{
+    background-color: beige;
+    border-color: #2350AC !important;
+    color : black;
+}
+
+#profil .btn-outline:hover{
+    background-color: #2350AC !important;
+    color : white;
+}
+/*FIN CONSULTER PROFIL*/
+
+/*MODIFIER PROFIL RESPONSABLE ETUDIANT*/
+#modif{
+    background-color: beige !important;
+}
+/*FIN MODIFIER PROFIL RESPONSABLE ETUDIANT*/
+#cv{
+    background-color: beige !important;
+}
+
+#cv .btn{
+    background-color: #2350AC;
+    color : white;
+}
+
+#cv .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+/*PROPOSITIONS RECUES*/
+#proprecues .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#proprecues .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+/*FIN PROPOSITIONS RECUES*/
+
+/*VERIFIER ETUDIANT*/
+#validerEtudiants .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#validerEtudiants .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#aucunEtudiant{
+    background-color: beige !important;
+}
+/*FIN VERIFIER ETUDIANT*/
+
+/*VALIDER ENTREPRISE*/
+#validerEntrprise .btn{
+    background-color: #2350AC !important;
+    color : white;
+}
+
+#validerEntrprise .btn:hover{
+    background-color: #929fba !important;
+    color : black;
+}
+
+#aucunReponsable{
+    background-color: beige !important;
+}
+/*FIN VALIDER ENTREPRISE*/
+#tetetabbleu{
+    background-color: #2350AC;
+}
+
+#tetetabgris{
+    background-color: darkgray;
+}
+
+
+#texte{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    min-height:380px;
+    color:#222222;
+}

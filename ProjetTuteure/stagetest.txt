@@ -1,0 +1,493 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mer. 15 jan. 2020 à 13:42
+-- Version du serveur :  10.4.10-MariaDB
+-- Version de PHP :  7.3.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `stage`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cv`
+--
+
+DROP TABLE IF EXISTS `cv`;
+CREATE TABLE IF NOT EXISTS `cv` (
+  `idCV` int(11) NOT NULL AUTO_INCREMENT,
+  `langue` varchar(20) DEFAULT NULL,
+  `idDiplome` int(11) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`idCV`),
+  KEY `idDiplome` (`idDiplome`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `cv`
+--
+
+INSERT INTO `cv` (`idCV`, `langue`, `idDiplome`) VALUES
+(1, 'Espagnol Anglais', 2),
+(2, 'Anglais', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cvde`
+--
+
+DROP TABLE IF EXISTS `cvde`;
+CREATE TABLE IF NOT EXISTS `cvde` (
+  `idCV` int(11) NOT NULL,
+  `idEtudiant` int(11) NOT NULL,
+  PRIMARY KEY (`idCV`,`idEtudiant`),
+  KEY `idCv` (`idCV`),
+  KEY `idEtudiant` (`idEtudiant`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `cvde`
+--
+
+INSERT INTO `cvde` (`idCV`, `idEtudiant`) VALUES
+(1, 3),
+(2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `demande`
+--
+
+DROP TABLE IF EXISTS `demande`;
+CREATE TABLE IF NOT EXISTS `demande` (
+  `idEtudiant` int(11) NOT NULL,
+  `idStage` int(11) NOT NULL,
+  `accepte` int(11) NOT NULL,
+  `idCV` int(11) NOT NULL,
+  PRIMARY KEY (`idEtudiant`,`idStage`,`idCV`),
+  KEY `demande_ibfk_2` (`idStage`),
+  KEY `demande_ibfk_3` (`idCV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `demande`
+--
+
+INSERT INTO `demande` (`idEtudiant`, `idStage`, `accepte`, `idCV`) VALUES
+(3, 2, 1, 1),
+(4, 1, 0, 1),
+(4, 2, 0, 1),
+(4, 3, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `diplome`
+--
+
+DROP TABLE IF EXISTS `diplome`;
+CREATE TABLE IF NOT EXISTS `diplome` (
+  `idDiplome` int(11) NOT NULL AUTO_INCREMENT,
+  `niveauDiplome` char(1) DEFAULT NULL,
+  `libDiplome` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idDiplome`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `diplome`
+--
+
+INSERT INTO `diplome` (`idDiplome`, `niveauDiplome`, `libDiplome`) VALUES
+(1, 'L', 'Informatique'),
+(2, 'M', 'Commerce'),
+(3, 'L', 'Droit'),
+(4, 'D', 'Biologie'),
+(5, 'L', 'Anglais'),
+(6, 'M', 'Informatique'),
+(7, 'D', 'Informatique'),
+(8, 'L', 'Commerce'),
+(9, 'D', 'Commerce'),
+(10, 'M', 'Droit'),
+(11, 'D', 'Droit'),
+(12, 'L', 'Biologie'),
+(13, 'M', 'Biologie'),
+(14, 'M', 'Anglais'),
+(15, 'D', 'Anglais');
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `entreprise`
+--
+
+DROP TABLE IF EXISTS `entreprise`;
+CREATE TABLE IF NOT EXISTS `entreprise` (
+  `idEntreprise` int(11) NOT NULL AUTO_INCREMENT,
+  `nomEntreprise` varchar(30) DEFAULT NULL,
+  `mailEntreprise` varchar(30) DEFAULT NULL,
+  `numSiren` varchar(15) DEFAULT NULL,
+  `telEntreprise` varchar(15) DEFAULT NULL,
+  `adresseEta` varchar(60) DEFAULT NULL,
+  `cdp` varchar(30) DEFAULT NULL,
+  `idVille` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idEntreprise`),
+  KEY `idVille` (`idVille`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `entreprise`
+--
+
+INSERT INTO `entreprise` (`idEntreprise`, `nomEntreprise`, `mailEntreprise`, `numSiren`, `telEntreprise`, `adresseEta`, `cdp`, `idVille`) VALUES
+(1, 'LeGrand', 'legrand@sarl.fr', '984954498', '0545283652', '10 rue jean moulin', '87000', 1),
+(2, 'LeStream', 'LeStream@sarl.fr', '6247685', '0524523664', '158 rue Stephane Bern', '33000', 2),
+(3, 'Moumoud&Cie', 'M&Co@sarl.fr', '974646136278', '25368695', '24 rue mat Pokora', '986542', 3),
+(4, 'Fnac', 'FNAC.contact@sarl.fr', '542154498', '0545654654', '16D rue du pasteur jarousseau', '951236', 4),
+(5, 'Demont', 'Demont@sarl.fr', '987654321', '17849562', '10 rue patrik timsith', '98753', 5),
+(7, 'bonjourandco', 'bonjour@sarl.fr', '132456789', '0123456789', '154 Rue de la Salutation', '87000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etablissement`
+--
+
+DROP TABLE IF EXISTS `etablissement`;
+CREATE TABLE IF NOT EXISTS `etablissement` (
+  `idEtablissement` int(11) NOT NULL,
+  `nomEta` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `adresseEta` varchar(60) CHARACTER SET utf8 NOT NULL,
+  `cdp` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `idVille` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idEtablissement`),
+  KEY `idVille` (`idVille`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `etablissement`
+--
+
+INSERT INTO `etablissement` (`idEtablissement`, `nomEta`, `adresseEta`, `cdp`, `idVille`) VALUES
+(1, 'IUT du Limousin', '12 Allée André Maurois', '87065', 1),
+(2, 'Faculté des Sciences de Limoges', '123 Avenue Albert Thomas', '87000', 1),
+(3, 'Université de Bordeaux', '146 rue Léo Saignat', '33607', 2),
+(4, 'Université de Bâle', 'Petersplatz 1', '98746', 4),
+(5, 'Université de Bucarest', 'Bulevardul Regina Elisabeta', 'Bucuresti 030018', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etudiant`
+--
+
+DROP TABLE IF EXISTS `etudiant`;
+CREATE TABLE IF NOT EXISTS `etudiant` (
+  `idEtudiant` int(11) NOT NULL,
+  `idEtablissement` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idEtudiant`),
+  KEY `idEtudiant` (`idEtudiant`,`idEtablissement`),
+  KEY `idEtablissement` (`idEtablissement`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `etudiant`
+--
+
+INSERT INTO `etudiant` (`idEtudiant`, `idEtablissement`) VALUES
+(3, 4),
+(4, 4),
+(12, 4),
+(13, 4),
+(14, 4),
+(15, 4),
+(16, 4),
+(17, 4),
+(18, 4);
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pays`
+--
+
+DROP TABLE IF EXISTS `pays`;
+CREATE TABLE IF NOT EXISTS `pays` (
+  `idPays` int(11) NOT NULL AUTO_INCREMENT,
+  `libPays` varchar(30) NOT NULL,
+  PRIMARY KEY (`idPays`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `pays`
+--
+
+INSERT INTO `pays` (`idPays`, `libPays`) VALUES
+(1, 'France'),
+(2, 'Belgique'),
+(3, 'Suisse'),
+(4, 'Roumanie'),
+(5, 'Québec');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personne`
+--
+
+DROP TABLE IF EXISTS `personne`;
+CREATE TABLE IF NOT EXISTS `personne` (
+  `idPersonne` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) DEFAULT NULL,
+  `prenom` varchar(30) DEFAULT NULL,
+  `telephone` varchar(30) DEFAULT NULL,
+  `administrateur` int(11) DEFAULT NULL,
+  `persMail` varchar(30) DEFAULT NULL,
+  `passwd` varchar(30) DEFAULT NULL,
+  `naissance` date DEFAULT NULL,
+  PRIMARY KEY (`idPersonne`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `personne`
+--
+
+INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `telephone`, `administrateur`, `persMail`, `passwd`, `naissance`) VALUES
+(1, 'Rupont', 'Jean', '0606060606', 0, 'jean.rupont@unilim.fr', 'jr41025', '1963-02-21'),
+(2, 'Ramos', 'Marc', '0612345678', 1, 'm.ramos@unilim.fr', 'ramarc456789', '1974-04-08'),
+(3, 'Eudipe', 'Edouard', '0618253697', 0, 'edouard.eudipe@etu.unilim.fr', '0410036726u', '1999-05-26'),
+(4, 'Emphore', 'Etienne', '0747484945', 0, 'etienne.emphore@etu.unilim.fr', 'ee158ee15', '2000-12-17'),
+(5, 'Restia', 'Rodolphe', '0645897562', 0, 'rodolphe.restia@unilim.fr', 'rr91kobalad', '1967-07-08'),
+(6, 'Rubi', 'Rene', '0123456789', 0, 'rene.rubi@unilim.fr', 'rubileboss', '2019-02-06'),
+(12, 'bagolle', 'julien', '0123456789', 0, 'julien@etu.unilim.fr', '123456', '2020-01-01'),
+(13, 'Etienne', 'Edouard', '05220202020', 0, 'etienne.edouard@gmail.com', '45678910', '2020-02-11'),
+(14, 'Eric', 'Eriche', '0520002020', 0, 'eric.eriche@gmail.com', '0505050', '2020-02-18'),
+(15, 'Erina', 'Eudicie', '0502020', 0, 'erina.eudicie@gmail.com', '0202020', '2020-02-18'),
+(16, 'Earl', 'Edmond', '0505050', 0, 'earl.edmond@gmail.com', '00202020', '2020-02-12'),
+(17, 'Earvin', 'E\'Gapeth', '0500400104', 0, 'earvin.egapeth@gmail.com', '2020115', '2020-02-11'),
+(18, 'Eba', 'Essence', '050505020', 0, 'eba.essence@gmail.com', '02505052', '2020-02-10');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `responsableentreprise`
+--
+
+DROP TABLE IF EXISTS `responsableentreprise`;
+CREATE TABLE IF NOT EXISTS `responsableentreprise` (
+  `idResponsableEnt` int(11) NOT NULL,
+  `idEntreprise` int(11) NOT NULL,
+  PRIMARY KEY (`idResponsableEnt`,`idEntreprise`),
+  KEY `idResponsableEnt` (`idResponsableEnt`),
+  KEY `idEntreprise` (`idEntreprise`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `responsableentreprise`
+--
+
+INSERT INTO `responsableentreprise` (`idResponsableEnt`, `idEntreprise`) VALUES
+(5, 1),
+(6, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `responsableetudiant`
+--
+
+DROP TABLE IF EXISTS `responsableetudiant`;
+CREATE TABLE IF NOT EXISTS `responsableetudiant` (
+  `idResponsable` int(11) NOT NULL,
+  `idEtablissement` int(11) NOT NULL,
+  PRIMARY KEY (`idResponsable`,`idEtablissement`),
+  KEY `idEtablissement` (`idEtablissement`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `responsableetudiant`
+--
+
+INSERT INTO `responsableetudiant` (`idResponsable`, `idEtablissement`) VALUES
+(1, 5),
+(2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `stage`
+--
+
+DROP TABLE IF EXISTS `stage`;
+CREATE TABLE IF NOT EXISTS `stage` (
+  `idStage` int(11) NOT NULL AUTO_INCREMENT,
+  `dateDebut` date DEFAULT NULL,
+  `mission` text NOT NULL,
+  `langueRequise` text NOT NULL,
+  `descriptionStage` text NOT NULL,
+  `titre` text NOT NULL,
+  `hebergement` int(11) DEFAULT NULL,
+  `idEntreprise` int(11) DEFAULT NULL,
+  `idDiplome` int(11) DEFAULT NULL,
+  `idVille` int(11) DEFAULT NULL,
+  `nbSemaines` int(11) DEFAULT NULL,
+  `etat` int(11) NOT NULL,
+  `valide` int(11) NOT NULL,
+  `datePub` date DEFAULT NULL,
+  PRIMARY KEY (`idStage`),
+  KEY `idEntreprise` (`idEntreprise`),
+  KEY `idDiplome` (`idDiplome`),
+  KEY `idVille` (`idVille`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `stage`
+--
+
+INSERT INTO `stage` (`idStage`, `dateDebut`, `mission`, `langueRequise`, `descriptionStage`, `titre`, `hebergement`, `idEntreprise`, `idDiplome`, `idVille`, `nbSemaines`,`etat`,`valide`,`datePub`) VALUES
+(1, '1999-05-26', 'apporter le café', 'anglais', 'vous devez apporter le café', 'stage1', 0, 1, 2, 1, 13, 1, 0, '1999-05-26'),
+(2, '1999-05-26', 'photocopie', 'espagnol', 'gérer l’imprimante de l’entreprise', 'stage2', 1, 2, 2, 2, 11, 1, 0, '1999-05-26'),
+(3, '1999-05-26', 'ménage', 'allemand', 'faire le ménage de l’entreprise', 'stage3', 0, 3, 3, 3, 15, 1, 0, '1999-05-26'),
+(4, '2020-02-03', 'Programmer un programme', 'Anglais', 'JavaScript, UI Design', 'Stage en JS chez nous', 0, 4, 3, 4, 12, 0, 0, '2020-02-29'),
+(5, '2020-02-17', 'Programmer un robot ', 'espagnol ', 'Programmer un robot afin qu\'il parle espganol ', 'Juan el robocito', 0, 4, 4, 4, 12, 0, 0, '2020-02-06');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ville`
+--
+
+DROP TABLE IF EXISTS `ville`;
+CREATE TABLE IF NOT EXISTS `ville` (
+  `idVille` int(11) NOT NULL AUTO_INCREMENT,
+  `libVille` varchar(30) DEFAULT NULL,
+  `idPays` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idVille`),
+  KEY `idPays` (`idPays`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ville`
+--
+
+INSERT INTO `ville` (`idVille`, `libVille`, `idPays`) VALUES
+(1, 'Limoges', 1),
+(2, 'Bordeaux', 1),
+(3, 'Bruxelles', 2),
+(4, 'Bale', 3),
+(5, 'Bucarest', 4);
+
+CREATE TABLE IF NOT EXISTS `masqueretudiant` (
+  `idEtudiant` int(11) NOT NULL,
+  PRIMARY KEY (`idEtudiant`),
+   KEY `idEtudiant` (`idEtudiant`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `masquerresponsableentreprise` (
+  `idResponsableEnt` int(11) NOT NULL,
+  PRIMARY KEY (`idResponsableEnt`),
+   KEY `idResponsableEnt` (`idResponsableEnt`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `cv`
+--
+ALTER TABLE `cv`
+  ADD CONSTRAINT `cv_ibfk_1` FOREIGN KEY (`idDiplome`) REFERENCES `diplome` (`idDiplome`);
+
+--
+-- Contraintes pour la table `cvde`
+--
+ALTER TABLE `cvde`
+  ADD CONSTRAINT `cvde_ibfk_1` FOREIGN KEY (`idCV`) REFERENCES `cv` (`idCV`),
+  ADD CONSTRAINT `cvde_ibfk_2` FOREIGN KEY (`idEtudiant`) REFERENCES `etudiant` (`idEtudiant`);
+
+--
+-- Contraintes pour la table `demande`
+--
+ALTER TABLE `demande`
+  ADD CONSTRAINT `demande_ibfk_1` FOREIGN KEY (`idEtudiant`) REFERENCES `personne` (`idPersonne`),
+  ADD CONSTRAINT `demande_ibfk_2` FOREIGN KEY (`idStage`) REFERENCES `stage` (`idStage`),
+  ADD CONSTRAINT `demande_ibfk_3` FOREIGN KEY (`idCV`) REFERENCES `cvde` (`idCV`);
+
+--
+-- Contraintes pour la table `entreprise`
+--
+ALTER TABLE `entreprise`
+  ADD CONSTRAINT `entreprise_ibfk_1` FOREIGN KEY (`idVille`) REFERENCES `ville` (`idVille`);
+
+--
+-- Contraintes pour la table `etablissement`
+--
+ALTER TABLE `etablissement`
+  ADD CONSTRAINT `etablissement_ibfk_1` FOREIGN KEY (`idVille`) REFERENCES `ville` (`idVille`);
+
+--
+-- Contraintes pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD CONSTRAINT `etudiant_ibfk_1` FOREIGN KEY (`idEtablissement`) REFERENCES `etablissement` (`idEtablissement`),
+  ADD CONSTRAINT `etudiant_ibfk_2` FOREIGN KEY (`idEtudiant`) REFERENCES `personne` (`idPersonne`);
+
+--
+-- Contraintes pour la table `responsableentreprise`
+--
+ALTER TABLE `responsableentreprise`
+  ADD CONSTRAINT `responsableentreprise_ibfk_1` FOREIGN KEY (`idResponsableEnt`) REFERENCES `personne` (`idPersonne`),
+  ADD CONSTRAINT `responsableentreprise_ibfk_2` FOREIGN KEY (`idEntreprise`) REFERENCES `entreprise` (`idEntreprise`);
+
+--
+-- Contraintes pour la table `responsableetudiant`
+--
+ALTER TABLE `responsableetudiant`
+  ADD CONSTRAINT `responsableetudiant_ibfk_1` FOREIGN KEY (`idResponsable`) REFERENCES `personne` (`idPersonne`),
+  ADD CONSTRAINT `responsableetudiant_ibfk_2` FOREIGN KEY (`idEtablissement`) REFERENCES `etablissement` (`idEtablissement`);
+
+--
+-- Contraintes pour la table `stage`
+--
+ALTER TABLE `stage`
+  ADD CONSTRAINT `stage_ibfk_1` FOREIGN KEY (`idEntreprise`) REFERENCES `entreprise` (`idEntreprise`),
+  ADD CONSTRAINT `stage_ibfk_2` FOREIGN KEY (`idDiplome`) REFERENCES `diplome` (`idDiplome`),
+  ADD CONSTRAINT `stage_ibfk_3` FOREIGN KEY (`idVille`) REFERENCES `ville` (`idVille`);
+
+--
+-- Contraintes pour la table `ville`
+--
+ALTER TABLE `ville`
+  ADD CONSTRAINT `ville_ibfk_1` FOREIGN KEY (`idPays`) REFERENCES `pays` (`idPays`);
+  
+ALTER TABLE `masqueretudiant`
+ADD CONSTRAINT `masqueretudiant_ibfk_2` FOREIGN KEY (`idEtudiant`) REFERENCES `etudiant` (`idEtudiant`);
+
+ALTER TABLE `masquerresponsableentreprise`
+ADD CONSTRAINT `masquerresponsableentreprise_ibfk_3` FOREIGN KEY (`idResponsableEnt`) REFERENCES `responsableentreprise` (`idResponsableEnt`);
+  
+ ALTER TABLE `stage` ADD FULLTEXT `ft_nom` (`mission`);
+ ALTER TABLE `stage` ADD FULLTEXT `ft_nom_2` (`langueRequise`);
+ ALTER TABLE `stage` ADD FULLTEXT `ft_nom_3` (`descriptionStage`);
+ ALTER TABLE `stage` ADD FULLTEXT `ft_nom_4` (`titre`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
